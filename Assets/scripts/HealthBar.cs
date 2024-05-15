@@ -33,5 +33,10 @@ public class HealthBar : MonoBehaviour
     {
         healthSlider.value = currentHealth / maxHealth; // Nastavíme hodnotu Slideru zdraví na základì aktuální hodnoty zdraví
     }
+
+    public float GetHealth()
+    {
+        return currentHealth;
+    }
 }
 

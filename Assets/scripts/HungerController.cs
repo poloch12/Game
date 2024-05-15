@@ -2,16 +2,28 @@ using UnityEngine;
 
 public class HungerController : MonoBehaviour
 {
-    public HungerBar hungerBar; // Reference na skript hunger baru
+    private HungerBar hungerBar; // Reference na skript hunger baru
 
-    public float starvationThreshold = 20f; // Hranice, kdy hráè zaène trpìt hladem
+    public float starvationThreshold = 0f; // Hranice, kdy hráè zaène trpìt hladem
 
-    void Update()
+    private HealthBar healthBar;
+
+
+
+    private void Start()
     {
-        /*if (hungerBar.GetCurrentHunger() <= starvationThreshold)
-        {
-            // Provádìt akce, které indikují hlad hráèe
-            Debug.Log("I'm hungry!");
-        }*/
+        healthBar = GameObject.Find("HealthBar").GetComponent<HealthBar>();
+        hungerBar = GameObject.Find("HungerBar").GetComponent<HungerBar>();
+
+        InvokeRepeating("Starvation",0.1f,1f);
+    }
+  
+    private void Starvation()
+    {
+        if (hungerBar.GetCurrentHunger() <= starvationThreshold)
+            {
+                // Provádìt akce, které indikují hlad hráè
+                healthBar.DecreaseHealth(2);
+            }
     }
 }
