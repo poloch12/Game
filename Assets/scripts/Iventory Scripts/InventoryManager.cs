@@ -9,7 +9,21 @@ public class InventoryManager : MonoBehaviour
     public GameObject InventoryItemPrefab;
     [HideInInspector] GameObject handItem;
     int selectedSlot = -1;
+    /*public static InventoryManager instance;
 
+    private void Awake()
+    {
+ 
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Debug.LogWarning("Multiple instances of InventoryManager found. Destroying this instance.");
+            Destroy(gameObject);
+        }
+    }*/
     private void Start()
     {
         ChangeSelectedSlot(0);
@@ -48,7 +62,8 @@ public class InventoryManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("No item recived");
+            Destroy(handItem);
+            handItem = null;
         }
     }
 

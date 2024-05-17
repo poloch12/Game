@@ -15,7 +15,15 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public Item item;
     [HideInInspector] public int count = 1;
     [HideInInspector] public Transform parentAfterDrag;
-   
+    /*private int initialCount; // Store initial count when dragging starts
+    private int maxStackSize; // Maximum stack size defined in InventoryManager
+
+    private void Awake()
+    {
+        initialCount = count;
+        maxStackSize = InventoryManager.instance.maxStackedItems;
+    }*/
+
     public void InitialiseItem(Item newItem)
     {
         item = newItem;
@@ -31,6 +39,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
+        Debug.Log("Draging detected!");
         image.raycastTarget = false;
         parentAfterDrag = transform.parent;
         transform.SetParent(transform.root);
@@ -48,4 +57,12 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         transform.SetParent(parentAfterDrag);
     }
 
+    /*public void OnScroll(PointerEventData eventData)
+    {
+        Debug.Log("Scrolling detected!");
+        float scrollDelta = eventData.scrollDelta.y;
+        int increment = (scrollDelta > 0) ? 1 : -1; // Determine whether to increase or decrease count
+        count = Mathf.Clamp(initialCount + increment, 1, maxStackSize); // Ensure count stays within bounds
+        RefreshCount();
+    }*/
 }
