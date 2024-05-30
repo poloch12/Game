@@ -15,6 +15,7 @@ MonoBehaviour:
   name: Pickaxe
   type: 0
   actionType: 0
+  identificator: 1
   stackable: 0
-  prefabToSpawn: {fileID: 0}
+  prefabToSpawn: {fileID: 759299240502773723, guid: 77f90539ed1f73241a938409d40bfd63, type: 3}
   image: {fileID: 21300000, guid: eb721409cfa0aa640810f6c2ce6660e3, type: 3}

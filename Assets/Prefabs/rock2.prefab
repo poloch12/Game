@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1448719627329542752
+--- !u!1 &2328174035841276163
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,47 +8,48 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3698882970464178603}
-  - component: {fileID: 1372820575472712465}
-  - component: {fileID: 3330580602506529292}
-  - component: {fileID: 1597317637028516682}
+  - component: {fileID: 6169655577815259886}
+  - component: {fileID: 1447271852737150677}
+  - component: {fileID: 3335888442012820240}
+  - component: {fileID: 2692470345972360939}
+  - component: {fileID: 6804027356225905642}
   m_Layer: 0
   m_Name: rock2
-  m_TagString: Untagged
+  m_TagString: Rock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3698882970464178603
+--- !u!4 &6169655577815259886
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1448719627329542752}
+  m_GameObject: {fileID: 2328174035841276163}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 28.759506, y: 15.109802, z: -5.0836935}
-  m_LocalScale: {x: 10.698643, y: 10.698643, z: 10.698643}
-  m_ConstrainProportionsScale: 0
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &1372820575472712465
+--- !u!33 &1447271852737150677
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1448719627329542752}
-  m_Mesh: {fileID: -448245740997676312, guid: 61c8305fb8d9c634d8c5da27ef706ae9, type: 3}
---- !u!23 &3330580602506529292
+  m_GameObject: {fileID: 2328174035841276163}
+  m_Mesh: {fileID: -448245740997676312, guid: fbb7427d72955b542985513d5a4bd991, type: 3}
+--- !u!23 &3335888442012820240
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1448719627329542752}
+  m_GameObject: {fileID: 2328174035841276163}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -62,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 8507789265930873676, guid: 61c8305fb8d9c634d8c5da27ef706ae9, type: 3}
+  - {fileID: 8507789265930873676, guid: fbb7427d72955b542985513d5a4bd991, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -84,13 +85,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &1597317637028516682
+--- !u!64 &2692470345972360939
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1448719627329542752}
+  m_GameObject: {fileID: 2328174035841276163}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -103,6 +104,20 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: -448245740997676312, guid: 61c8305fb8d9c634d8c5da27ef706ae9, type: 3}
+  m_Mesh: {fileID: -448245740997676312, guid: fbb7427d72955b542985513d5a4bd991, type: 3}
+--- !u!114 &6804027356225905642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2328174035841276163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 169b25ebc8d157541ba0e3a06a25a781, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 3
+  stonePrefab: {fileID: 9199328991885990768, guid: e0c97e17f1ea10643b857a60309127e0, type: 3}

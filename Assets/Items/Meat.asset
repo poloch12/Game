@@ -15,6 +15,7 @@ MonoBehaviour:
   name: Meat
   type: 1
   actionType: 1
+  identificator: 5
   stackable: 1
   prefabToSpawn: {fileID: 0}
   image: {fileID: 21300000, guid: f5d63aed19d7fe546ac61cd75c34893e, type: 3}

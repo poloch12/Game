@@ -15,6 +15,7 @@ MonoBehaviour:
   name: Wood
   type: 1
   actionType: 1
+  identificator: 6
   stackable: 1
-  prefabToSpawn: {fileID: 0}
+  prefabToSpawn: {fileID: 5664210371868252175, guid: 6bfa86fea232b3f4494a1e4a9947a10b, type: 3}
   image: {fileID: 21300000, guid: 78b8e6696c4b8eb4b83bc2b12b13ed9f, type: 3}

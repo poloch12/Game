@@ -34,15 +34,20 @@ public class InventoryManager : MonoBehaviour
         if (Input.inputString != null)
         {
             bool isNumber = int.TryParse(Input.inputString, out int number);
-            
-            if (isNumber && number > 0 && number < 9) 
+
+            if (isNumber && number > 0 && number < 9)
             {
                 ChangeSelectedSlot(number - 1);
             }
         }
+        // Check for use item action (for example, left mouse button click)
+        if (Input.GetMouseButtonDown(0)) 
+        { 
+            UseItem();
+        }
     }
 
-    void ChangeSelectedSlot(int newValue) 
+    void ChangeSelectedSlot(int newValue)
     { 
         
         if (selectedSlot >= 0)  
@@ -173,5 +178,31 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
+    void UseItem()
+    {        
+        Item selectedItem = GetSelectedItem(false);
+        if (selectedItem == null || selectedItem.type == ItemType.Material)
+        {
+            return;
+        }
 
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, 100f))
+        {
+            if (selectedItem.actionType == ActionType.Chop && hit.collider.CompareTag("Tree"))
+            {
+                hit.collider.GetComponent<Tree>().Chop();
+            }
+            else if (selectedItem.actionType == ActionType.Mine && hit.collider.CompareTag("Rock"))
+            {
+                hit.collider.GetComponent<Rock>().Mine();
+            }
+            else
+            {
+                Debug.LogWarning("Item cannot be used on this object.");
+            }
+        }
+    }
 }

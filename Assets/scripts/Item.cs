@@ -8,9 +8,10 @@ public class Item : ScriptableObject
 {
     
     [Header("Only gameplay")]
-    public string name;
+    public string itemName;
     public ItemType type;
     public ActionType actionType;
+    public ItemIdentificator identificator;
     [Header("Only UI")]
     public bool stackable = true;
     [Header("3D Model")]
@@ -30,4 +31,15 @@ public enum ActionType
     Mine,
     Chop,
     Smash
+}
+
+public enum ItemIdentificator
+{
+    Axe,
+    Pickaxe,
+    Sword,
+    Stick,
+    Stone,
+    Meat,
+    Wood
 }

@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using UnityEngine;
-
 public class InventoryOpener : MonoBehaviour
 {
     // Reference to the inventory UI game object
