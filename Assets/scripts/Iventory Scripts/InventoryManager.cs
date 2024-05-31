@@ -9,11 +9,13 @@ public class InventoryManager : MonoBehaviour
     public GameObject InventoryItemPrefab;
     [HideInInspector] GameObject handItem;
     int selectedSlot = -1;
-    /*public static InventoryManager instance;
+    public InventoryOpener inventoryOpener;
+    //public static InventoryManager instance;
 
     private void Awake()
     {
- 
+        inventoryOpener = GameObject.Find("MainInventoryGroup").GetComponent<InventoryOpener>();
+        /*
         if (instance == null)
         {
             instance = this;
@@ -22,8 +24,8 @@ public class InventoryManager : MonoBehaviour
         {
             Debug.LogWarning("Multiple instances of InventoryManager found. Destroying this instance.");
             Destroy(gameObject);
-        }
-    }*/
+        }*/
+    }
     private void Start()
     {
         ChangeSelectedSlot(0);
@@ -41,7 +43,7 @@ public class InventoryManager : MonoBehaviour
             }
         }
         // Check for use item action (for example, left mouse button click)
-        if (Input.GetMouseButtonDown(0)) 
+        if (Input.GetMouseButtonDown(0) && !inventoryOpener.isInventoryOpen) 
         { 
             UseItem();
         }

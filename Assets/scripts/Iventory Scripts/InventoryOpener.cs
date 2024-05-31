@@ -7,11 +7,12 @@ public class InventoryOpener : MonoBehaviour
     // Reference to the inventory UI game object
     public GameObject inventoryUI;
     public GameObject darkBackground;
+    public GameObject crafting;
 
     public PlayerController playerController;
 
     // Boolean flag to track if the inventory is open
-    private bool isInventoryOpen = false;
+    public bool isInventoryOpen = false;
 
     // Update is called once per frame
     void Update()
@@ -39,6 +40,7 @@ public class InventoryOpener : MonoBehaviour
     {
         inventoryUI.SetActive(true);
         darkBackground.SetActive(true);
+        crafting.SetActive(true);
         isInventoryOpen = true;
         Cursor.lockState = CursorLockMode.Confined;
 
@@ -49,6 +51,7 @@ public class InventoryOpener : MonoBehaviour
     {
         inventoryUI.SetActive(false);
         darkBackground.SetActive(false);
+        crafting.SetActive(false);
         isInventoryOpen = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
