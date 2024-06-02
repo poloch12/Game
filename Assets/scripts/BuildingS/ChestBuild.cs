@@ -1,13 +1,11 @@
 using UnityEngine;
 
-public class Chest : MonoBehaviour
+public class ChestBuild : MonoBehaviour
 {
     public GameObject replacementObject;
-    [HideInInspector] public float interactionDistance = 2f;
-    public LayerMask interactionLayer;
+    [HideInInspector] public float interactionDistance = 4f;
     [HideInInspector] public int requiredWoodCount = 8;
     private InventoryManager inventoryManager;
-
 
     void Start()
     {
@@ -19,16 +17,16 @@ public class Chest : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Z))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out var hit, interactionDistance, interactionLayer))
+            if (Physics.Raycast(ray, out RaycastHit hit, interactionDistance))
             {
-
-                if (Input.GetKeyDown(KeyCode.Z) && CanReplaceObject())
+                if (hit.collider.gameObject.CompareTag("Chest") && CanReplaceObject())
                 {
                     ReplaceObject();
                 }
             }
         }
     }
+
     bool CanReplaceObject()
     {
         if (inventoryManager != null)
@@ -44,6 +42,6 @@ public class Chest : MonoBehaviour
         inventoryManager.RemoveItem(ItemIdentificator.Wood, requiredWoodCount);
 
         Destroy(gameObject);
-        Instantiate(replacementObject, transform.position, transform.rotation);
+        Instantiate(replacementObject, transform.position, replacementObject.transform.rotation);
     }
 }

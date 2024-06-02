@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -195,17 +196,33 @@ public class InventoryManager : MonoBehaviour
                 Destroy(handItem);
                 handItem = null;
             }
-            // Vytvoøení instance pøedmìtu (pøedmìt musí mít pøednastavený 3D model)
-            GameObject newItem = Instantiate(item.prefabToSpawn, spawnPoint.position, spawnPoint.rotation);
-            handItem = newItem;
-            var rigidbody = newItem.GetComponent<Rigidbody>();
-            Destroy(rigidbody);
+            if (item.identificator == ItemIdentificator.Stick || item.identificator == ItemIdentificator.Wood)
+            {
+                GameObject newItem = Instantiate(item.prefabToSpawn, spawnPoint.position, item.prefabToSpawn.transform.rotation);
+                handItem = newItem;
+                var rigidbody = newItem.GetComponent<Rigidbody>();
+                Destroy(rigidbody);
 
-            // Umístìní nového pøedmìtu na zvolené místo
-            newItem.transform.SetParent(spawnPoint); // Nastaví rodièe novému pøedmìtu na místo urèení
-            newItem.transform.localPosition = Vector3.zero; // Nastaví lokální pozici na nulu (aby se pøedmìt umístil pøesnì na SpawnPoint)
+                // Umístìní nového pøedmìtu na zvolené místo
+                newItem.transform.SetParent(spawnPoint); // Nastaví rodièe novému pøedmìtu na místo urèení
+                newItem.transform.localPosition = Vector3.zero; // Nastaví lokální pozici na nulu (aby se pøedmìt umístil pøesnì na SpawnPoint)
 
-            Debug.Log("Pøedmìt " + item.name + " umístìn do ruky na pozici: " + spawnPoint.position);
+                Debug.Log("Pøedmìt " + item.name + " umístìn do ruky na pozici: " + item.prefabToSpawn.transform.rotation);
+            }
+            else
+            {
+                // Vytvoøení instance pøedmìtu (pøedmìt musí mít pøednastavený 3D model)
+                GameObject newItem = Instantiate(item.prefabToSpawn, spawnPoint.position, spawnPoint.rotation);
+                handItem = newItem;
+                var rigidbody = newItem.GetComponent<Rigidbody>();
+                Destroy(rigidbody);
+
+                // Umístìní nového pøedmìtu na zvolené místo
+                newItem.transform.SetParent(spawnPoint); // Nastaví rodièe novému pøedmìtu na místo urèení
+                newItem.transform.localPosition = Vector3.zero; // Nastaví lokální pozici na nulu (aby se pøedmìt umístil pøesnì na SpawnPoint)
+
+                Debug.Log("Pøedmìt " + item.name + " umístìn do ruky na pozici: " + spawnPoint.position);
+            }
         }
         else
         {

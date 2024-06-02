@@ -16,6 +16,7 @@ MonoBehaviour:
   type: 1
   actionType: 2
   identificator: 3
+  maxStackCount: 4
   stackable: 1
-  prefabToSpawn: {fileID: 2517122265485785823, guid: 5c124432e92cb754ebb98ba7dc055416, type: 3}
+  prefabToSpawn: {fileID: 9015982698711715847, guid: 50ed51c886999c349ac784ceac2e516f, type: 3}
   image: {fileID: 21300000, guid: 519d76f24bcd057429eac0d661561145, type: 3}

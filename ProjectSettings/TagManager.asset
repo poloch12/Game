@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Tree
   - Rock
+  - Chest
+  - Tent
+  - Campfire
   layers:
   - Default
   - TransparentFX
@@ -16,7 +19,7 @@ TagManager:
   - Tent
   - Campfire
   - Chest
-  - 
+  - Sign
   - 
   - 
   - 
