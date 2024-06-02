@@ -8,6 +8,7 @@ public class InventorySlot : MonoBehaviour, IDropHandler
 {
     public Image image;
     public Color selectedColor, notSelectedColor;
+    public int index;
 
     private void Awake()
     {
@@ -24,14 +25,40 @@ public class InventorySlot : MonoBehaviour, IDropHandler
     }
     public void OnDrop(PointerEventData eventData)
     {
+        InventoryItem draggedItem = eventData.pointerDrag.GetComponent<InventoryItem>();
 
-        if (transform.childCount == 0) 
+
+        if (transform.childCount == 0) // Slot is empty
         {
-            InventoryItem inventoryItem = eventData.pointerDrag.GetComponent<InventoryItem>();
-            inventoryItem.parentAfterDrag = transform;
+            if (draggedItem != null)
+            {
+                draggedItem.parentAfterDrag = transform;
+                draggedItem.transform.SetParent(transform);
+            }
         }
+        else // Slot is not empty
+        {
+            InventoryItem currentItem = GetComponentInChildren<InventoryItem>();
 
+            if (currentItem != null && draggedItem != null && currentItem.item == draggedItem.item && currentItem.item.stackable)
+            {
+                int totalCount = currentItem.count + draggedItem.count;
+                if (totalCount <= currentItem.item.maxStackCount)
+                {
+                    currentItem.count = totalCount;
+                    currentItem.RefreshCount();
+                    Destroy(draggedItem.gameObject); // Destroy the dragged item as it has been stacked
+                }
+                else
+                {
+                    int remainingCount = currentItem.item.maxStackCount - currentItem.count;
+                    currentItem.count = currentItem.item.maxStackCount;
+                    currentItem.RefreshCount();
+
+                    draggedItem.count -= remainingCount;
+                    draggedItem.RefreshCount();
+                }
+            }
+        }
     }
-
-
 }

@@ -10,7 +10,7 @@ public class InventoryOpener : MonoBehaviour
     public GameObject crafting;
 
     public PlayerController playerController;
-
+    public CraftingManager craftingManager; // Add a reference to the CraftingManager
     // Boolean flag to track if the inventory is open
     public bool isInventoryOpen = false;
 
@@ -54,5 +54,6 @@ public class InventoryOpener : MonoBehaviour
         crafting.SetActive(false);
         isInventoryOpen = false;
         Cursor.lockState = CursorLockMode.Locked;
+        craftingManager.TransferItemsToInventory();
     }
 }

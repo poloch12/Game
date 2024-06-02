@@ -15,16 +15,6 @@ public class InventoryManager : MonoBehaviour
     private void Awake()
     {
         inventoryOpener = GameObject.Find("MainInventoryGroup").GetComponent<InventoryOpener>();
-        /*
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Debug.LogWarning("Multiple instances of InventoryManager found. Destroying this instance.");
-            Destroy(gameObject);
-        }*/
     }
     private void Start()
     {
@@ -46,6 +36,20 @@ public class InventoryManager : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && !inventoryOpener.isInventoryOpen) 
         { 
             UseItem();
+        }
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            DropSelectedItem();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            InventoryItem selectedItem = inventorySlots[selectedSlot].GetComponentInChildren<InventoryItem>();
+            if (selectedItem != null && selectedItem.item.stackable)
+            {
+                selectedItem.SplitStack();
+            }
         }
     }
 
@@ -102,6 +106,24 @@ public class InventoryManager : MonoBehaviour
 
         return false;
     }
+    public void AddSplitItem(Item item, int count)
+    {
+        for (int i = 0; i < inventorySlots.Length; i++)
+        {
+            InventorySlot slot = inventorySlots[i];
+            InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
+            if (itemInSlot == null)
+            {
+                GameObject newItemGo = Instantiate(InventoryItemPrefab, slot.transform);
+                InventoryItem newInventoryItem = newItemGo.GetComponent<InventoryItem>();
+                newInventoryItem.InitialiseItem(item);
+                newInventoryItem.count = count;
+                newInventoryItem.RefreshCount();
+                return;
+            }
+        }
+    }
+
     void SpawnNewItem(Item item, InventorySlot slot)
     {
         GameObject newItemGo = Instantiate(InventoryItemPrefab, slot.transform);
@@ -145,6 +167,17 @@ public class InventoryManager : MonoBehaviour
             InventorySlot slot = inventorySlots[i];
             InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
             if (itemInSlot != null && itemInSlot.item == item)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    public bool HasFreeSlot()
+    {
+        for (int i = 0; i < inventorySlots.Length; i++)
+        {
+            if (inventorySlots[i].GetComponentInChildren<InventoryItem>() == null)
             {
                 return true;
             }
@@ -204,6 +237,79 @@ public class InventoryManager : MonoBehaviour
             else
             {
                 Debug.LogWarning("Item cannot be used on this object.");
+            }
+        }
+    }
+    void DropSelectedItem()
+    {
+        Item selectedItem = GetSelectedItem(false);
+        if (selectedItem == null)
+        {
+            Debug.LogWarning("No item selected to drop.");
+            return;
+        }
+
+        InventorySlot slot = inventorySlots[selectedSlot];
+        InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
+        if (itemInSlot != null)
+        {
+            Vector3 dropPosition = Camera.main.transform.position + Camera.main.transform.forward * 2;
+            GameObject droppedItem = Instantiate(selectedItem.prefabToSpawn, dropPosition, Quaternion.identity);
+            droppedItem.GetComponent<Rigidbody>().AddForce(Camera.main.transform.forward * 2, ForceMode.Impulse);
+
+            if (itemInSlot.item.stackable && itemInSlot.count > 1)
+            {
+                itemInSlot.count--;
+                itemInSlot.RefreshCount();
+            }
+            else
+            {
+                Destroy(itemInSlot.gameObject);
+                if (handItem != null)
+                {
+                    Destroy(handItem);
+
+                    handItem = null;
+                }
+            }
+
+            Debug.Log("Dropped item: " + selectedItem.name);
+        }
+    }
+    public int GetItemCount(ItemIdentificator identificator)
+    {
+        int count = 0;
+        foreach (var slot in inventorySlots)
+        {
+            var itemInSlot = slot.GetComponentInChildren<InventoryItem>();
+            if (itemInSlot != null && itemInSlot.item.identificator == identificator)
+            {
+                count += itemInSlot.count;
+            }
+        }
+        return count;
+    }
+
+    public void RemoveItem(ItemIdentificator identificator, int amount)
+    {
+        int remainingAmount = amount;
+        for (int i = 0; i < inventorySlots.Length; i++)
+        {
+            var slot = inventorySlots[i];
+            var itemInSlot = slot.GetComponentInChildren<InventoryItem>();
+            if (itemInSlot != null && itemInSlot.item.identificator == identificator)
+            {
+                if (itemInSlot.count <= remainingAmount)
+                {
+                    remainingAmount -= itemInSlot.count;
+                    Destroy(itemInSlot.gameObject);
+                }
+                else
+                {
+                    itemInSlot.count -= remainingAmount;
+                    itemInSlot.RefreshCount();
+                    break;
+                }
             }
         }
     }

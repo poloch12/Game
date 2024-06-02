@@ -5,7 +5,7 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
 {
 
 
@@ -18,15 +18,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     [HideInInspector] public Transform parentAfterDrag;
 
     private UnityEvent dropItemWhenDragged = new ();
-    /*private int initialCount; // Store initial count when dragging starts
-    private int maxStackSize; // Maximum stack size defined in InventoryManager
-
-    private void Awake()
-    {
-        initialCount = count;
-        maxStackSize = InventoryManager.instance.maxStackedItems;
-    }*/
-
+    
     public void InitialiseItem(Item newItem)
     {
         item = newItem;
@@ -60,13 +52,30 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         image.raycastTarget = true;
         transform.SetParent(parentAfterDrag);
     }
-
-    /*public void OnScroll(PointerEventData eventData)
+    public void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log("Scrolling detected!");
-        float scrollDelta = eventData.scrollDelta.y;
-        int increment = (scrollDelta > 0) ? 1 : -1; // Determine whether to increase or decrease count
-        count = Mathf.Clamp(initialCount + increment, 1, maxStackSize); // Ensure count stays within bounds
-        RefreshCount();
-    }*/
+        if (eventData.button == PointerEventData.InputButton.Right)
+        {
+            SplitStack();
+        }
+    }
+    public void SplitStack()
+    {
+        if (count > 1)
+        {
+            InventoryManager inventoryManager = FindObjectOfType<InventoryManager>();
+            if (inventoryManager.HasFreeSlot())
+            {
+                int halfCount = count / 2;
+                count -= halfCount;
+
+                inventoryManager.AddSplitItem(item, halfCount);
+                RefreshCount();
+            }
+            else
+            {
+                Debug.Log("No space available to split the stack.");
+            }
+        }
+    }
 }

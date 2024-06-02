@@ -12,6 +12,7 @@ public class Item : ScriptableObject
     public ItemType type;
     public ActionType actionType;
     public ItemIdentificator identificator;
+    [HideInInspector] public int maxStackCount = 4;
     [Header("Only UI")]
     public bool stackable = true;
     [Header("3D Model")]
