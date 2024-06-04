@@ -11,10 +11,11 @@ GameObject:
   - component: {fileID: 1999286253030743067}
   - component: {fileID: 2875954640235374530}
   - component: {fileID: 7903209610470868526}
+  - component: {fileID: 3393535610866029301}
   - component: {fileID: 7284805491750275881}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: bush2
-  m_TagString: Untagged
+  m_TagString: Bush
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -84,6 +85,21 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &3393535610866029301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6614401528093587565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1cb6010b1e2fbc4bb38b3c99c9641a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 3
+  stickPrefab: {fileID: 9015982698711715847, guid: 50ed51c886999c349ac784ceac2e516f, type: 3}
+  spawnHeightOffset: 1
 --- !u!64 &7284805491750275881
 MeshCollider:
   m_ObjectHideFlags: 0

@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe2b4b1374f19cf4bb46371a265ff81d, type: 3}
   m_Name: Meat
   m_EditorClassIdentifier: 
-  name: Meat
+  itemName: 
   type: 1
   actionType: 1
   identificator: 5
+  maxStackCount: 4
   stackable: 1
-  prefabToSpawn: {fileID: 0}
+  prefabToSpawn: {fileID: 5998706268097797673, guid: e72ab9dd2c3f47e49b0daa1bd3c90ef5, type: 3}
   image: {fileID: 21300000, guid: f5d63aed19d7fe546ac61cd75c34893e, type: 3}

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2988173003150002779}
   - component: {fileID: 3772821531938850134}
   - component: {fileID: 4991276291887542390}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,7 +115,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3824511089359029029}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: tent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -152,7 +152,7 @@ GameObject:
   - component: {fileID: 8381527001223751558}
   - component: {fileID: 7702301711345125321}
   - component: {fileID: 7846147438659384011}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -258,7 +258,7 @@ GameObject:
   - component: {fileID: 6484421095033021513}
   - component: {fileID: 4126811443756859925}
   - component: {fileID: 269933343919103648}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -11,6 +12,10 @@ public class InventoryManager : MonoBehaviour
     [HideInInspector] GameObject handItem;
     int selectedSlot = -1;
     public InventoryOpener inventoryOpener;
+    public GameObject StickInHand;
+    public GameObject WoodInHand;
+    public GameObject TorchInHand;
+    public HungerBar hungerBar;
     //public static InventoryManager instance;
 
     private void Awake()
@@ -74,6 +79,9 @@ public class InventoryManager : MonoBehaviour
         }
         else
         {
+            WoodInHand.SetActive(false);
+            StickInHand.SetActive(false);
+            TorchInHand.SetActive(false);
             Destroy(handItem);
             handItem = null;
         }
@@ -190,27 +198,34 @@ public class InventoryManager : MonoBehaviour
     {
         if (HasItem(item))
         {
-
+            StickInHand.SetActive(false);
+            WoodInHand.SetActive(false);
+            TorchInHand.SetActive(false);
             if (handItem != null) 
             {
                 Destroy(handItem);
                 handItem = null;
+                TorchInHand.SetActive(false);
+                StickInHand.SetActive(false);
+                WoodInHand.SetActive(false);
             }
-            if (item.identificator == ItemIdentificator.Stick || item.identificator == ItemIdentificator.Wood)
+            if (item.identificator == ItemIdentificator.Stick)
             {
-                GameObject newItem = Instantiate(item.prefabToSpawn, spawnPoint.position, item.prefabToSpawn.transform.rotation);
-                handItem = newItem;
-                var rigidbody = newItem.GetComponent<Rigidbody>();
-                Destroy(rigidbody);
-
-                // Umístìní nového pøedmìtu na zvolené místo
-                newItem.transform.SetParent(spawnPoint); // Nastaví rodièe novému pøedmìtu na místo urèení
-                newItem.transform.localPosition = Vector3.zero; // Nastaví lokální pozici na nulu (aby se pøedmìt umístil pøesnì na SpawnPoint)
-
-                Debug.Log("Pøedmìt " + item.name + " umístìn do ruky na pozici: " + item.prefabToSpawn.transform.rotation);
+                StickInHand.SetActive(true);
+            }
+            else if (item.identificator == ItemIdentificator.Wood)
+            {
+                WoodInHand.SetActive(true);
+            }
+            else if (item.identificator == ItemIdentificator.Torch)
+            {
+                TorchInHand.SetActive(true);
             }
             else
             {
+                TorchInHand.SetActive(false);
+                StickInHand.SetActive(false);
+                WoodInHand.SetActive(false);
                 // Vytvoøení instance pøedmìtu (pøedmìt musí mít pøednastavený 3D model)
                 GameObject newItem = Instantiate(item.prefabToSpawn, spawnPoint.position, spawnPoint.rotation);
                 handItem = newItem;
@@ -233,8 +248,14 @@ public class InventoryManager : MonoBehaviour
     void UseItem()
     {        
         Item selectedItem = GetSelectedItem(false);
-        if (selectedItem == null || selectedItem.type == ItemType.Material)
+        if (selectedItem == null || selectedItem.type == ItemType.Material && selectedItem.identificator != ItemIdentificator.CookedMeat)
         {
+            return;
+        }
+        if (selectedItem.identificator == ItemIdentificator.CookedMeat)
+        {
+            hungerBar.IncreaseHunger(30f);
+            GetSelectedItem(true);
             return;
         }
 
@@ -250,6 +271,10 @@ public class InventoryManager : MonoBehaviour
             else if (selectedItem.actionType == ActionType.Mine && hit.collider.CompareTag("Rock"))
             {
                 hit.collider.GetComponent<Rock>().Mine();
+            }
+            else if (selectedItem.actionType == ActionType.Smash && hit.collider.CompareTag("Bush"))
+            {
+                hit.collider.GetComponent<Bush>().Smash();
             }
             else
             {

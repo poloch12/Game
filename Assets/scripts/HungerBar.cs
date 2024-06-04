@@ -49,4 +49,3 @@ public class HungerBar : MonoBehaviour
         healthSlider.value = healthPercentage; // Nastavíme hodnotu Slideru zdraví
     }
 }
-

@@ -119,7 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1215abfef02fbf449919791434d7d32f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  replacementObject: {fileID: 0}
+  replacementObject: {fileID: 2817880987251744818, guid: ac048fad12403174393c7fbc5315fbf1, type: 3}
   interactionDistance: 2
   requiredWoodCount: 2
   requiredStickCount: 10

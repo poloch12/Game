@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe2b4b1374f19cf4bb46371a265ff81d, type: 3}
   m_Name: Sword
   m_EditorClassIdentifier: 
-  name: Fist
-  type: 1
+  itemName: 
+  type: 0
   actionType: 2
   identificator: 2
+  maxStackCount: 4
   stackable: 0
-  prefabToSpawn: {fileID: 0}
-  image: {fileID: 21300000, guid: b6b2224b1e1d1f8488f359eb56c5adce, type: 3}
+  prefabToSpawn: {fileID: 1701599222238103791, guid: 597d68e3154665f4a8812a42eac2b7a0, type: 3}
+  image: {fileID: 21300000, guid: 0d94d0e2b3e570347b096769e2e77e02, type: 3}

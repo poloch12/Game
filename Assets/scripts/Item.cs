@@ -31,7 +31,9 @@ public enum ActionType
 {
     Mine,
     Chop,
-    Smash
+    Smash,
+    Eat,
+    Light
 }
 
 public enum ItemIdentificator
@@ -42,5 +44,7 @@ public enum ItemIdentificator
     Stick,
     Stone,
     Meat,
-    Wood
+    Wood,
+    CookedMeat,
+    Torch
 }

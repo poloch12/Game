@@ -9,6 +9,14 @@ TagManager:
   - Chest
   - Tent
   - Campfire
+  - Bush
+  - ChestBuilding
+  - CampfireBuilding
+  - caveEntrance
+  - CaveSpawn
+  - CaveOut
+  - CaveEntranceSpawn
+  - SpawnPoint
   layers:
   - Default
   - TransparentFX
@@ -20,7 +28,7 @@ TagManager:
   - Campfire
   - Chest
   - Sign
-  - 
+  - Object
   - 
   - 
   - 
