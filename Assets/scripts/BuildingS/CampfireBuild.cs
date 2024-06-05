@@ -5,7 +5,7 @@ public class CampfireBuild : MonoBehaviour
     public GameObject replacementObject;
     [HideInInspector] public float interactionDistance = 4f;
     [HideInInspector] public int requiredStickCount = 6;
-    [HideInInspector] public int requiredStoneCount = 4;
+    [HideInInspector] public int requiredStoneCount = 8;
     private InventoryManager inventoryManager;
 
     void Start()

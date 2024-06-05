@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Forest.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/Death.unity
+    guid: 23445b4634d493944ac88805844eebeb
+  - enabled: 1
+    path: Assets/Scenes/Escaped.unity
+    guid: 053064b34523ac84da81c1bbdd5fc41d
   m_configObjects: {}

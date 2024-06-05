@@ -73,7 +73,7 @@ public class InventoryManager : MonoBehaviour
         if (recivedItem != null)
         {
 
-            Transform SpawnPoint = GameObject.Find("SpawnPoint").transform;
+            Transform SpawnPoint = GameObject.Find("ItemSpawnPoint").transform;
             PlaceItemInHand(recivedItem, SpawnPoint);
 
         }
@@ -262,7 +262,7 @@ public class InventoryManager : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, 100f))
+        if (Physics.Raycast(ray, out hit, 5f))
         {
             if (selectedItem.actionType == ActionType.Chop && hit.collider.CompareTag("Tree"))
             {
@@ -275,6 +275,10 @@ public class InventoryManager : MonoBehaviour
             else if (selectedItem.actionType == ActionType.Smash && hit.collider.CompareTag("Bush"))
             {
                 hit.collider.GetComponent<Bush>().Smash();
+            }
+            else if (selectedItem.actionType == ActionType.Smash && hit.collider.CompareTag("Rabbit"))
+            {
+                hit.collider.GetComponent<Rabbit>().Kill();
             }
             else
             {
@@ -355,4 +359,17 @@ public class InventoryManager : MonoBehaviour
             }
         }
     }
+    public bool HasItemOfType(ItemIdentificator identificator)
+    {
+        for (int i = 0; i < inventorySlots.Length; i++)
+        {
+            InventoryItem itemInSlot = inventorySlots[i].GetComponentInChildren<InventoryItem>();
+            if (itemInSlot != null && itemInSlot.item.identificator == identificator)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

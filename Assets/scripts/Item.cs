@@ -33,7 +33,8 @@ public enum ActionType
     Chop,
     Smash,
     Eat,
-    Light
+    Light,
+    End
 }
 
 public enum ItemIdentificator
@@ -46,5 +47,6 @@ public enum ItemIdentificator
     Meat,
     Wood,
     CookedMeat,
-    Torch
+    Torch,
+    Gas
 }
